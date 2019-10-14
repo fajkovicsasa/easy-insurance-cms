@@ -62,12 +62,31 @@
 <!-- Page Content -->
 <div class="container">
     <script>
-        function calculatePricing(insuranceType, value) {
 
+        let selectedInsuranceTypeId;
+
+        function calculatePricing() {
+
+            let productValue = document.getElementById("inputProductValue").value;
+
+            let xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+                    if (xmlhttp.status == 200) {
+                         document.getElementById("calculationResult").innerText = xmlhttp.responseText;
+                    } else {
+                        alert('Error while retrieving calculation value!');
+                    }
+                }
+            };
+
+            xmlhttp.open("GET", "/api/price-calculator/v1?serviceId=" + selectedInsuranceTypeId + "&productValue=" + productValue, true);
+            xmlhttp.send();
         }
 
-        function showCalculatorWindow(insuranceType) {
-            alert(insuranceType);
+        function setSelectedInsuranceType(insuranceTypeId) {
+            selectedInsuranceTypeId = insuranceTypeId;
         }
     </script>
 
@@ -109,9 +128,9 @@
                     <p class="card-text" th:text="${insuranceType.description}">description</p>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary"
-                            th:onclick="'javascript:showCalculatorWindow(\'' + ${insuranceType.id} + '\');'">Calculate
-                        pricing
+                    <button type="button" th:onclick="'javascript:setSelectedInsuranceType(\'' + ${insuranceType.id} + '\');'"
+                            class="btn btn-primary" data-toggle="modal" data-target="#calculationModal">
+                        Calculate pricing
                     </button>
                 </div>
             </div>
@@ -129,6 +148,36 @@
     </div>
     <!-- /.container -->
 </footer>
+
+<div class="modal fade" id="calculationModal" tabindex="-1" role="dialog" aria-labelledby="calculationModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="calculationModalLabel">Insurance pricing calculator</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend" style="margin-right: 10px;">
+                        <span class="input-group-text" id="inputGroup-sizing-default">How much is it worth: </span>
+                    </div>
+                    <input type="number" min="1" id="inputProductValue" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div>
+                    <p>Price to pay: </p>
+                    <h3 id="calculationResult">0.00</h3>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button onclick="calculatePricing()" type="button" class="btn btn-primary">Calculate</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
