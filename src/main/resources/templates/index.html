@@ -67,7 +67,7 @@
         }
 
         function showCalculatorWindow(insuranceType) {
-
+            alert(insuranceType);
         }
     </script>
 
@@ -105,11 +105,14 @@
             <div class="card h-100">
                 <img class="card-img-top" src="#" th:src="${insuranceType.imageUrl}">
                 <div class="card-body">
-                    <h4 class="card-title" th:text="${insuranceType.name}" >Type</h4>
+                    <h4 class="card-title" th:text="${insuranceType.name}">Type</h4>
                     <p class="card-text" th:text="${insuranceType.description}">description</p>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary" onclick="showCalculatorWindow(1)">Calculate pricing</button>
+                    <button class="btn btn-primary"
+                            th:onclick="'javascript:showCalculatorWindow(\'' + ${insuranceType.id} + '\');'">Calculate
+                        pricing
+                    </button>
                 </div>
             </div>
         </div>
