@@ -35,3 +35,5 @@ insurance.iml/target
 /logs
 /.mvn
 /.idea
+h2-gamblerbot.trace.db
+h2-gamblerbot.mv.db
