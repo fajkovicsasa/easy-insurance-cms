@@ -9,8 +9,20 @@ CREATE TABLE IF NOT EXISTS INSURANCE_TYPES
     image_url                    TEXT
 );
 
---
---
+CREATE TABLE IF NOT EXISTS USERS
+(
+    id BIGINT NOT NULL IDENTITY PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50),
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULl UNIQUE,
+    is_user BOOLEAN NOT NULL,
+    is_admin  BOOLEAN NOT NULL,
+    is_active BOOLEAN NOT NULL
+);
+
+
 -- INSERT INTO INSURANCE_TYPES
 -- VALUES (1, 'Bike',
 --         'Do not worry ever again about your bike being stolen.<br>I want to ride my bicycle, races are coming your way.',
@@ -27,3 +39,7 @@ CREATE TABLE IF NOT EXISTS INSURANCE_TYPES
 -- VALUES (4, 'Sports Equipment',
 --         'Something went missing while you were taking a shower after a hard training? We have you covered.', 30, 0,
 --         20000, 'https://cdn.pixabay.com/photo/2018/04/28/16/37/sport-3357630_960_720.jpg');
+--
+-- INSERT INTO USERS VALUES ( 1, 'admin', '1234', 'Sasa', 'Fajkovic', 'fajkovic.sasa@gmail.com', false, true, true );
+-- INSERT INTO USERS VALUES ( 2, 'userActive', '1234', 'User', 'Active', 'user.active@gmail.com', true, false, true );
+-- INSERT INTO USERS VALUES ( 3, 'userInactive', '1234', 'User', 'Inactive', 'user.inactive@gmail.com', true, false, true );

@@ -3,6 +3,8 @@ package hr.digitalnival.insurance.service;
 import hr.digitalnival.insurance.exception.InsuranceTypeNotFoundException;
 import hr.digitalnival.insurance.model.InsuranceType;
 import hr.digitalnival.insurance.repository.InsuranceTypeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.Optional;
 
 @Service
 public class InsuranceTypeService {
+
+    private Logger log = LoggerFactory.getLogger(InsuranceTypeService.class);
 
     private InsuranceTypeRepository insuranceTypeRepository;
 
@@ -33,7 +37,13 @@ public class InsuranceTypeService {
         throw new InsuranceTypeNotFoundException(id);
     }
 
+    /**
+     * Returns all insurance types from the database.
+     *
+     * @return
+     */
     public List<InsuranceType> getAll() {
+        log.info("Will return all insurance types,");
         return insuranceTypeRepository.findAll();
     }
 }

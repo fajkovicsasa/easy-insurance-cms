@@ -22,8 +22,9 @@ public class PriceCalculatorApi {
 
     @GetMapping("")
     public ResponseEntity<Double> calculatePrice(@RequestParam Long serviceId, @RequestParam Double productValue) {
+        log.info("Will calculate price for serviceId:" + serviceId + " and productValue: " + productValue);
         try {
-            return new ResponseEntity<>(priceCalculatorService.calculatePrice(serviceId, productValue), HttpStatus.OK);
+            return new ResponseEntity<>(priceCalculatorService.returnCalculatedPrice(serviceId, productValue), HttpStatus.OK);
         } catch (InsuranceTypeNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

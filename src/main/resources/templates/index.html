@@ -74,7 +74,7 @@
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if (xmlhttp.status == 200) {
-                         document.getElementById("calculationResult").innerText = xmlhttp.responseText;
+                         document.getElementById("calculationResult").innerText = formatCalculatedValue(xmlhttp.responseText);
                     } else {
                         alert('Error while retrieving calculation value!');
                     }
@@ -87,6 +87,11 @@
 
         function setSelectedInsuranceType(insuranceTypeId) {
             selectedInsuranceTypeId = insuranceTypeId;
+        }
+
+        function formatCalculatedValue(calculatedValue) {
+            return parseFloat(Math.round(calculatedValue * 100) / 100).toFixed(2);
+
         }
     </script>
 
@@ -167,8 +172,8 @@
                     <input type="number" min="1" id="inputProductValue" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                 </div>
                 <div>
-                    <p>Price to pay: </p>
-                    <h3 id="calculationResult">0.00</h3>
+                    <p>Price: </p>
+                    <h3 id="calculationResult"></h3>
                 </div>
             </div>
             <div class="modal-footer">

@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(path = "")
 public class WebsiteController {
@@ -24,7 +26,11 @@ public class WebsiteController {
     }
 
     @GetMapping("/admin")
-    public String getAdminDashboard() {
+    public String getAdminDashboard(Model model) {
+        List<InsuranceType> insuranceTypes = insuranceTypeService.getAll();
+
+        model.addAttribute("allInsuranceTypes", insuranceTypes);
+
         return "/admin/dashboard";
     }
 }
