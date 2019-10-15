@@ -1,7 +1,6 @@
 package hr.digitalnival.insurance.model;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "USERS")

@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     private AuthenticationUserDetailsService authenticationUserDetailsService;
 
 
@@ -32,9 +31,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //TODO separate by roles /api, /h2-console
         http.authorizeRequests()
                 .antMatchers("/api/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/assets/**").permitAll()
                 .antMatchers("/register").permitAll()

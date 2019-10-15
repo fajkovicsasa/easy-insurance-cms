@@ -46,4 +46,19 @@ public class InsuranceTypeService {
         log.info("Will return all insurance types,");
         return insuranceTypeRepository.findAll();
     }
+
+    /**
+     * Updates the #InsuranceType entity
+     *
+     * @param insuranceType
+     */
+    public void update(InsuranceType insuranceType) {
+        log.debug("Will update: " + insuranceType.toString());
+
+        if (insuranceType.getCoverageAmountBottomLimit() >= insuranceType.getCoverageAmountTopLimit()) {
+            throw new IllegalArgumentException("Bottom limit must be lower than top limit for coverage");
+        }
+
+        insuranceTypeRepository.save(insuranceType);
+    }
 }

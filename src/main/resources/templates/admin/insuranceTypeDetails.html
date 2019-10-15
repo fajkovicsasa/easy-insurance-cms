@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet"
+          href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+          integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+            integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+            integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+            crossorigin="anonymous"></script>
+
+    <meta charset="utf-8">
+    <title>Insurance of the future - Admin dashboard</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/admin">Admin dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div th:if="${errorMessage}!=null" class="container">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Error</strong> <span th:text="${errorMessage}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+
+<div th:if="${successMessage}!=null" class="container">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success</strong> <span th:text="${successMessage}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+
+<div class="container">
+    <form th:action="'/admin/insurance-types/' + ${insuranceType.id}" method="post">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="id" class="bmd-label-floating">id</label>
+                    <input type="number" class="form-control" name="id" id="id" th:value="${insuranceType.id}" readonly>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="name" class="bmd-label-floating">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" th:value="${insuranceType.name}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="description" class="bmd-label-floating">Description</label>
+                    <input type="text" class="form-control" name="description" id="description"
+                           th:value="${insuranceType.description}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="riskPercentage" class="bmd-label-floating">Risk %</label>
+                    <input type="number" min="0" max="100" step="0.1" class="form-control" name="riskPercentage"
+                           id="riskPercentage"
+                           th:value="${insuranceType.riskPercentage}">
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label for="coverageAmountBottomLimit" class="bmd-label-floating">Coverage amount BOTTOM limit</label>
+                    <input type="number" min="0" step="0.1" class="form-control" name="coverageAmountBottomLimit" id="coverageAmountBottomLimit" th:value="${insuranceType.coverageAmountBottomLimit}">
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label for="coverageAmountTopLimit" class="bmd-label-floating">Coverage amount TOP limit</label>
+                    <input type="number" min="0" step="0.1" class="form-control" name="coverageAmountTopLimit" id="coverageAmountTopLimit" th:value="${insuranceType.coverageAmountTopLimit}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="imageUrl" class="bmd-label-floating">Image URL</label>
+                    <input type="text" class="form-control" name="imageUrl" id="imageUrl"
+                           th:value="${insuranceType.imageUrl}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 text-center">
+                <a href="/admin" class="btn btn-secondary btn-raised">Back</a>
+            </div>
+            <div class="col-sm-10 text-center">
+                <button type="submit" class="btn btn-primary btn-raised">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
