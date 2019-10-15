@@ -66,7 +66,7 @@
         let inputProductValue;
 
         function validateAndCalculate() {
-            inputProductValue = document.getElementById("inputProductValue").value;
+            inputProductValue = parseFloat(document.getElementById("inputProductValue").value);
 
             if (!isInputValueValid(minValueAllowed, maxValueAllowed, inputProductValue)) {
                 return;
@@ -75,7 +75,10 @@
         }
 
         function isInputValueValid(min, max, value) {
-            if (value < min || value > max) {
+            console.log(min);
+            console.log(max);
+            console.log(value);
+            if (parseFloat(value) < min || parseFloat(value) > max) {
                 alert("Please check the minimum and maxim allowed value for this type of insurance.")
                 return false;
             }
@@ -95,7 +98,7 @@
                 }
             };
 
-            xmlhttp.open("GET", "/api/price-calculator/v1?serviceId=" + selectedInsuranceTypeId + "&productValue=" + inputProductValue, true);
+            xmlhttp.open("GET", "/api/price-calculator/v1?insuranceTypeId=" + selectedInsuranceTypeId + "&productValue=" + inputProductValue, true);
             xmlhttp.send();
         }
 
