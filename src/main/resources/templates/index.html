@@ -45,7 +45,6 @@
     </div>
 </nav>
 
-<!-- Header -->
 <header class="bg-primary py-5 mb-5">
     <div class="container h-100">
         <div class="row h-100 align-items-center">
@@ -62,29 +61,53 @@
     <script>
 
         let selectedInsuranceTypeId;
+        let minValueAllowed;
+        let maxValueAllowed;
+        let inputProductValue;
+
+        function validateAndCalculate() {
+            inputProductValue = document.getElementById("inputProductValue").value;
+
+            if (!isInputValueValid(minValueAllowed, maxValueAllowed, inputProductValue)) {
+                return;
+            }
+            calculatePricing();
+        }
+
+        function isInputValueValid(min, max, value) {
+            if (value < min || value > max) {
+                alert("Please check the minimum and maxim allowed value for this type of insurance.")
+                return false;
+            }
+            return true;
+        }
 
         function calculatePricing() {
-
-            let productValue = document.getElementById("inputProductValue").value;
-
             let xmlhttp = new XMLHttpRequest();
 
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if (xmlhttp.status == 200) {
-                         document.getElementById("calculationResult").innerText = formatCalculatedValue(xmlhttp.responseText);
+                        document.getElementById("calculationResult").innerText = formatCalculatedValue(xmlhttp.responseText);
                     } else {
                         alert('Error while retrieving calculation value!');
                     }
                 }
             };
 
-            xmlhttp.open("GET", "/api/price-calculator/v1?serviceId=" + selectedInsuranceTypeId + "&productValue=" + productValue, true);
+            xmlhttp.open("GET", "/api/price-calculator/v1?serviceId=" + selectedInsuranceTypeId + "&productValue=" + inputProductValue, true);
             xmlhttp.send();
         }
 
-        function setSelectedInsuranceType(insuranceTypeId) {
+        function setSelectedInsuranceType(insuranceTypeId, coverageBottomLimit, coverageTopLimit) {
             selectedInsuranceTypeId = insuranceTypeId;
+            document.getElementById("spanCoverageBottomLimit").innerText = coverageBottomLimit;
+            document.getElementById("inputProductValue").min = coverageBottomLimit;
+            document.getElementById("spanCoverageTopLimit").innerText = coverageTopLimit;
+            document.getElementById("inputProductValue").max = coverageTopLimit;
+
+            minValueAllowed = coverageBottomLimit;
+            maxValueAllowed = coverageTopLimit;
         }
 
         function formatCalculatedValue(calculatedValue) {
@@ -131,7 +154,8 @@
                     <p class="card-text" th:text="${insuranceType.description}">description</p>
                 </div>
                 <div class="card-footer">
-                    <button type="button" th:onclick="'javascript:setSelectedInsuranceType(\'' + ${insuranceType.id} + '\');'"
+                    <button type="button"
+                            th:onclick="'javascript:setSelectedInsuranceType(\'' + ${insuranceType.id} + '\',\'' + ${insuranceType.coverageAmountBottomLimit} + '\',\'' + ${insuranceType.coverageAmountTopLimit} + '\');'"
                             class="btn btn-primary" data-toggle="modal" data-target="#calculationModal">
                         Calculate pricing
                     </button>
@@ -158,11 +182,16 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div>
+                    <p class="text-muted text-center">Allowed values: <span id="spanCoverageBottomLimit"></span> - <span
+                            id="spanCoverageTopLimit"></span></p>
+                </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend" style="margin-right: 10px;">
                         <span class="input-group-text" id="inputGroup-sizing-default">How much is it worth: </span>
                     </div>
-                    <input required type="number" min="1" id="inputProductValue" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <input required type="number" min="0" max="0" step="0.1" id="inputProductValue" class="form-control"
+                           aria-label="Default" aria-describedby="inputGroup-sizing-default">
                 </div>
                 <div>
                     <p>Price: </p>
@@ -171,7 +200,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button onclick="calculatePricing()" type="button" class="btn btn-primary">Calculate</button>
+                <button onclick="validateAndCalculate()" type="button" class="btn btn-primary">Calculate</button>
             </div>
         </div>
     </div>
