@@ -20,7 +20,7 @@
             crossorigin="anonymous"></script>
 
     <meta charset="utf-8">
-    <title>Insurance of the future - Admin dashboard - Insurance type details</title>
+    <title>Insurance of the future - Admin dashboard - New Insurance Tupe</title>
 
 </head>
 <body>
@@ -52,28 +52,19 @@
     </div>
 </div>
 
-<div th:if="${successMessage}!=null" class="container">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success</strong> <span th:text="${successMessage}"></span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</div>
-
 <div class="container">
-    <form th:action="'/admin/insurance-types/' + ${insuranceType.id}" method="post">
+    <form th:action="'/admin/insurance-types/new'" method="post">
         <div class="row">
             <div class="col-sm-2">
                 <div class="form-group">
                     <label for="id" class="bmd-label-floating">id</label>
-                    <input type="number" class="form-control" name="id" id="id" th:value="${insuranceType.id}" readonly>
+                    <input type="number" class="form-control" name="id" id="id" readonly>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
                     <label for="name" class="bmd-label-floating">Name</label>
-                    <input type="text" class="form-control" name="name" id="name" required th:value="${insuranceType.name}">
+                    <input type="text" class="form-control" name="name" id="name" required>
                 </div>
             </div>
         </div>
@@ -82,8 +73,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="description" class="bmd-label-floating">Description</label>
-                    <input type="text" class="form-control" name="description" id="description" required
-                           th:value="${insuranceType.description}">
+                    <input type="text" class="form-control" name="description" id="description" required>
                 </div>
             </div>
         </div>
@@ -93,20 +83,19 @@
                 <div class="form-group">
                     <label for="riskPercentage" class="bmd-label-floating">Risk %</label>
                     <input type="number" min="0" max="100" step="0.1" class="form-control" name="riskPercentage" required
-                           id="riskPercentage"
-                           th:value="${insuranceType.riskPercentage}">
+                           id="riskPercentage">
                 </div>
             </div>
             <div class="col-sm-5">
                 <div class="form-group">
                     <label for="coverageAmountBottomLimit" class="bmd-label-floating">Coverage amount BOTTOM limit</label>
-                    <input type="number" min="0" step="0.1" required class="form-control" name="coverageAmountBottomLimit" id="coverageAmountBottomLimit" th:value="${insuranceType.coverageAmountBottomLimit}">
+                    <input type="number" min="0" step="0.1" required class="form-control" name="coverageAmountBottomLimit" id="coverageAmountBottomLimit">
                 </div>
             </div>
             <div class="col-sm-5">
                 <div class="form-group">
                     <label for="coverageAmountTopLimit" class="bmd-label-floating">Coverage amount TOP limit</label>
-                    <input type="number" min="0" step="0.1" required class="form-control" name="coverageAmountTopLimit" id="coverageAmountTopLimit" th:value="${insuranceType.coverageAmountTopLimit}">
+                    <input type="number" min="0" step="0.1" required class="form-control" name="coverageAmountTopLimit" id="coverageAmountTopLimit">
                 </div>
             </div>
         </div>
@@ -115,8 +104,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="imageUrl" class="bmd-label-floating">Image URL</label>
-                    <input type="text" class="form-control" name="imageUrl" id="imageUrl" required
-                           th:value="${insuranceType.imageUrl}">
+                    <input type="text" class="form-control" name="imageUrl" id="imageUrl" required>
                 </div>
             </div>
         </div>

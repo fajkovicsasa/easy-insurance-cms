@@ -55,10 +55,35 @@ public class InsuranceTypeService {
     public void update(InsuranceType insuranceType) {
         log.debug("Will update: " + insuranceType.toString());
 
+        if (insuranceType.getId() == null) {
+            throw new IllegalArgumentException("ID can't be null when performing and update.");
+        }
+
+        validateInsuranceType(insuranceType);
+
+        insuranceTypeRepository.save(insuranceType);
+    }
+
+    /**
+     * Creates an #InsuranceType entity
+     *
+     * @param insuranceType
+     */
+    public void create(InsuranceType insuranceType) {
+        log.debug("Will create a new entity: " + insuranceType.toString());
+
+        if (insuranceType.getId() != null) {
+            throw new IllegalArgumentException("ID must be null when creating a new entity");
+        }
+
+        validateInsuranceType(insuranceType);
+
+        insuranceTypeRepository.save(insuranceType);
+    }
+
+    private void validateInsuranceType(InsuranceType insuranceType) {
         if (insuranceType.getCoverageAmountBottomLimit() >= insuranceType.getCoverageAmountTopLimit()) {
             throw new IllegalArgumentException("Bottom limit must be lower than top limit for coverage");
         }
-
-        insuranceTypeRepository.save(insuranceType);
     }
 }

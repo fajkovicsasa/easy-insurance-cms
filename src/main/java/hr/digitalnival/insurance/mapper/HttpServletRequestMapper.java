@@ -8,7 +8,9 @@ public class HttpServletRequestMapper {
 
     public static InsuranceType toInsuranceType(HttpServletRequest request) {
         InsuranceType insuranceType = new InsuranceType();
-        insuranceType.setId(Long.parseLong(request.getParameter("id")));
+        if (!request.getParameter("id").trim().equals("")) { // When creating a new entity, the ID will be an empty string
+            insuranceType.setId(Long.parseLong(request.getParameter("id")));
+        }
         insuranceType.setName(request.getParameter("name"));
         insuranceType.setDescription(request.getParameter("description"));
         insuranceType.setRiskPercentage(Double.parseDouble(request.getParameter("riskPercentage")));

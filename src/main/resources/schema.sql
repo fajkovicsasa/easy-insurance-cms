@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS INSURANCE_TYPES
 (
-    id                           BIGINT PRIMARY KEY,
+    id                           BIGINT PRIMARY KEY AUTO_INCREMENT,
     name                         VARCHAR(100) NOT NULL UNIQUE,
     description                  VARCHAR(200) NOT NULL,
     risk_percentage              DOUBLE       NOT NULL,
