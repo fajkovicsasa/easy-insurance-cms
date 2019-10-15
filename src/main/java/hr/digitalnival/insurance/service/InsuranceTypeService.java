@@ -81,6 +81,22 @@ public class InsuranceTypeService {
         insuranceTypeRepository.save(insuranceType);
     }
 
+
+    /**
+     * Creates an #InsuranceType entity
+     *
+     * @param insuranceTypeId
+     */
+    public void delete(Long insuranceTypeId) {
+        log.debug("Will delete an entity: " + insuranceTypeId);
+
+        insuranceTypeRepository.deleteById(insuranceTypeId);
+    }
+
+    /**
+     * Validates the insurance type object. If it's not valid, an exception will be thrown
+     * @param insuranceType
+     */
     private void validateInsuranceType(InsuranceType insuranceType) {
         if (insuranceType.getCoverageAmountBottomLimit() >= insuranceType.getCoverageAmountTopLimit()) {
             throw new IllegalArgumentException("Bottom limit must be lower than top limit for coverage");

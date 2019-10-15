@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -34,9 +31,10 @@ public class WebsiteController {
     }
 
     @GetMapping("/admin")
-    public String showAdminDashboard(Model model) {
+    public String showAdminDashboard(Model model, @RequestParam(value = "error", required = false) Boolean showError) {
         List<InsuranceType> insuranceTypes = insuranceTypeService.getAll();
 
+        model.addAttribute("error", showError);
         model.addAttribute("allInsuranceTypes", insuranceTypes);
 
         return "/admin/dashboard";
@@ -86,6 +84,19 @@ public class WebsiteController {
             log.error(e.getMessage());
             model.addAttribute("errorMessage", "Error creating a new insurance type.");
             return "/admin/newInsuranceType";
+        }
+
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/admin/insurance-types/{id}/delete")
+    public String deleteInsuranceType( @PathVariable Long id) {
+        try {
+            insuranceTypeService.delete(id);
+        } catch (Exception e) {
+            log.error("There was an error trying to delete an insurance type " + id);
+            log.error(e.getMessage());
+            return "redirect:/admin?error=true";
         }
 
         return "redirect:/admin";
