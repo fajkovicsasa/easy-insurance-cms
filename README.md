@@ -7,3 +7,13 @@
 Made for fun, simple frontend page for a service sales (example is insurance industry) and admin module.
 All cards (offers) are loaded dynamically with dynamic price calculation.
 
+## How to start
+Simply run the project using your IDE or compile it and run the jar.
+By default it will start on port 8080.
+
+## How to access admin module
+Go to localhost:8080/admin
+* username: admin
+* password: 1234
+
+- check data.sql file for more credentials.
