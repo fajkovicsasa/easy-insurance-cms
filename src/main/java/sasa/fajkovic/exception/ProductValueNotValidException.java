@@ -1,4 +1,4 @@
-package hr.digitalnival.insurance.exception;
+package sasa.fajkovic.exception;
 
 public class ProductValueNotValidException extends RuntimeException {
 

@@ -1,8 +1,8 @@
-package hr.digitalnival.insurance.service;
+package sasa.fajkovic.service;
 
-import hr.digitalnival.insurance.model.User;
-import hr.digitalnival.insurance.model.UserPrincipal;
-import hr.digitalnival.insurance.repository.UserRepository;
+import sasa.fajkovic.model.User;
+import sasa.fajkovic.model.UserPrincipal;
+import sasa.fajkovic.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

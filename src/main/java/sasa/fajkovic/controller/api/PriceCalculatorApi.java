@@ -1,10 +1,10 @@
-package hr.digitalnival.insurance.controller.api;
+package sasa.fajkovic.controller.api;
 
-import hr.digitalnival.insurance.exception.InsuranceTypeNotFoundException;
-import hr.digitalnival.insurance.exception.ProductValueNotValidException;
-import hr.digitalnival.insurance.model.InsuranceType;
-import hr.digitalnival.insurance.service.InsuranceTypeService;
-import hr.digitalnival.insurance.service.PriceCalculatorService;
+import sasa.fajkovic.exception.InsuranceTypeNotFoundException;
+import sasa.fajkovic.exception.ProductValueNotValidException;
+import sasa.fajkovic.model.InsuranceType;
+import sasa.fajkovic.service.InsuranceTypeService;
+import sasa.fajkovic.service.PriceCalculatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

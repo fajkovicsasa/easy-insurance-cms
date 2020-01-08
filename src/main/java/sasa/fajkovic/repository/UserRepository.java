@@ -1,6 +1,6 @@
-package hr.digitalnival.insurance.repository;
+package sasa.fajkovic.repository;
 
-import hr.digitalnival.insurance.model.User;
+import sasa.fajkovic.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package hr.digitalnival.insurance.repository;
+package sasa.fajkovic.repository;
 
-import hr.digitalnival.insurance.model.InsuranceType;
+import sasa.fajkovic.model.InsuranceType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface InsuranceTypeRepository extends JpaRepository<InsuranceType, Long> {

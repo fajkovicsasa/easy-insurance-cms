@@ -1,6 +1,6 @@
-package hr.digitalnival.insurance.service;
+package sasa.fajkovic.service;
 
-import hr.digitalnival.insurance.model.InsuranceType;
+import sasa.fajkovic.model.InsuranceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

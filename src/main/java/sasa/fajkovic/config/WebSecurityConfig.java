@@ -1,6 +1,6 @@
-package hr.digitalnival.insurance.config;
+package sasa.fajkovic.config;
 
-import hr.digitalnival.insurance.service.AuthenticationUserDetailsService;
+import sasa.fajkovic.service.AuthenticationUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

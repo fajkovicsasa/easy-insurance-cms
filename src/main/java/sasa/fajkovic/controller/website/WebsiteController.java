@@ -1,8 +1,8 @@
-package hr.digitalnival.insurance.controller.website;
+package sasa.fajkovic.controller.website;
 
-import hr.digitalnival.insurance.mapper.HttpServletRequestMapper;
-import hr.digitalnival.insurance.model.InsuranceType;
-import hr.digitalnival.insurance.service.InsuranceTypeService;
+import sasa.fajkovic.mapper.HttpServletRequestMapper;
+import sasa.fajkovic.model.InsuranceType;
+import sasa.fajkovic.service.InsuranceTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

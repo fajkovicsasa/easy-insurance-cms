@@ -1,4 +1,4 @@
-package hr.digitalnival.insurance.model;
+package sasa.fajkovic.model;
 
 import javax.persistence.*;
 

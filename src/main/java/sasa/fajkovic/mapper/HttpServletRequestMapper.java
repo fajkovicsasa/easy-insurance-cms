@@ -1,6 +1,6 @@
-package hr.digitalnival.insurance.mapper;
+package sasa.fajkovic.mapper;
 
-import hr.digitalnival.insurance.model.InsuranceType;
+import sasa.fajkovic.model.InsuranceType;
 
 import javax.servlet.http.HttpServletRequest;
 
